@@ -1,0 +1,47 @@
+Alumno
+
+nombre
+
+legajo
+
+foto
+
+
+
+se guarda en archivos/alumno.txt (actualizar abm acá)
+
+la foto es nombre+legajo.ext
+
+foto en subdirectorio fotos
+
+
+alta de alumnos
+
+post nombre y legajo
+
+file archivo foto
+
+baja de alumnos
+
+crear 
+
+alumnosborrados/alumnos.txt(listado de alumnos borrados)
+
+fotos borradas/fotofecha.ext
+
+
+unlink()¡?¡?¡?¡?¡?
+
+
+modificación guardar el anterior
+
+alumnos modificados/alumnos.txt
+
+fotos cambiadas/fotofecha.ext
+
+listado
+
+GET devolver tabla html con el tag image
+
+se puede ver en el chrome
+
