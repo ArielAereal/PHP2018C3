@@ -3,8 +3,6 @@
 require_once ("entidades/alumno.php");
 require_once ("entidades/archivo.php");
 
-//ver el $_GET['queHago'];
-
 if(isset($_GET['queHago'])){
 	// armar el listado
 }
@@ -18,7 +16,7 @@ switch($queHago){
 
 	$p = new Alumno($_POST['nombre'],$_POST['legajo']);
 	
-	var_dump($p);
+//	var_dump($p);
 	$fotoname = $p->getNombre().$p->getlegajo();
 	$respuestaDeSubir = Archivo::Subir($fotoname);
 	
@@ -37,28 +35,22 @@ switch($queHago){
 	}
 	
 
-		/*
-		$codBarra = isset($_POST['codBarra']) ? $_POST['codBarra'] : NULL;
-		$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : NULL;
-		$archivo = $res["PathTemporal"];
-*/
-	//	$p = new Producto($codBarra, $nombre, $archivo);
-		
-	
-	
-		var_dump($p);
+	//		var_dump($p);
 
 		// guardar en el archivo
 		break;
 		
 	case "eliminar":
-		$codBarra = isset($_POST['codBarra']) ? $_POST['codBarra'] : NULL;
+
+	// si el legajo viene, ok, si no, el legajo es null
+
+		$legajo = isset($_POST['legajo']) ? $_POST['legajo'] : NULL;
 	
-		if(!Producto::Eliminar($codBarra)){
+		if(!Alumno::Eliminar($legajo)){
 			$mensaje = "Lamentablemente ocurrio un error y no se pudo escribir en el archivo.";
 		}
 		else{
-			$mensaje = "El archivo fue escrito correctamente. PRODUCTO eliminado CORRECTAMENTE!!!";
+			$mensaje = "El archivo fue escrito correctamente. ALUMNO eliminado CORRECTAMENTE!!!";
 		}
 	
 		echo $mensaje;

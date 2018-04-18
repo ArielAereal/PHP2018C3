@@ -1,19 +1,13 @@
 <?php
 class Archivo{
 
-	public static function Subir($foto)
+	public static function Subir()
 	{
-		
 		$retorno["Exito"] = TRUE;
 		var_dump($_FILES["archivo"]["name"]);
 		//INDICO CUAL SERA EL DESTINO DEL ARCHIVO SUBIDO
-		$archivoTmp = "$foto" . ".jpg";
-
-		if(!file_exists("../archivos")){
-			mkdir("../archivos");
-		}
-
-		$destino = "../archivos/" . $archivoTmp;
+		$archivoTmp = date("Ymd_His") . ".jpg";
+		$destino = "archivos/" . $archivoTmp;
 		
 		$tipoArchivo = pathinfo($_FILES["archivo"]["name"], PATHINFO_EXTENSION);
 
@@ -43,9 +37,7 @@ class Archivo{
 				return $retorno;
 			}
 		}
-		if(!file_exists("../archivos")){
-			mkdir("../archivos");
-		}
+		
 		if (!move_uploaded_file($_FILES["archivo"]["tmp_name"], $destino)) {
 
 			$retorno["Exito"] = FALSE;

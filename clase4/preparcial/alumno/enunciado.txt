@@ -7,19 +7,17 @@ legajo
 foto
 
 
-
-se guarda en archivos/alumno.txt (actualizar abm acá)
-
-la foto es nombre+legajo.ext
-
-foto en subdirectorio fotos
-
+la foto es nombre+legajo.ext 
 
 alta de alumnos
 
 post nombre y legajo
 
-file archivo foto
+file archivo foto 
+
+foto en subdirectorio fotos (OK)
+
+se guarda en archivos/alumno.txt (actualizar abm acá)
 
 baja de alumnos
 
