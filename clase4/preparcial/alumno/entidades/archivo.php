@@ -64,7 +64,7 @@ class Archivo{
 		}
 	}
 
-	public static function Borrar($path)
+/*	public static function Borrar($path)
 	{
 		return unlink($path);
 	}
@@ -72,6 +72,6 @@ class Archivo{
 	public static function Mover($pathOrigen, $pathDestino)
 	{
 		return copy($pathOrigen, $pathDestino);
-	}
+	}*/
 }
 ?>

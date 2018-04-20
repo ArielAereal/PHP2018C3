@@ -1,4 +1,4 @@
-Alumno
+﻿Alumno
 
 nombre
 
@@ -15,7 +15,7 @@ post nombre y legajo
 
 file archivo foto 
 
-foto en subdirectorio fotos (OK)
+foto en subdirectorio fotos 
 
 se guarda en archivos/alumno.txt (actualizar abm acá)
 
@@ -25,10 +25,7 @@ crear
 
 alumnosborrados/alumnos.txt(listado de alumnos borrados)
 
-fotos borradas/fotofecha.ext
-
-
-unlink()¡?¡?¡?¡?¡?
+fotos borradas/fotofecha.ext (OK)(OK)
 
 
 modificación guardar el anterior
