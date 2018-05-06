@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Usuario{
 
     private $nombre;
@@ -13,7 +15,7 @@ class Usuario{
         $this->nombre = $unnombre;
         $this->email = $unemail;
         $this->perfil = $unperfil;
-        $this->edad = $unaedad;
+        $this->edad = (int)$unaedad;
         $this->clave = $unaclave;
 
     }
@@ -56,80 +58,81 @@ class Usuario{
     }
 
     public function Mostrar(){
-        $salida = $this->getnombre() . "-" . $this->getemail()."-".$this->getperfil()."-".$this->getedad()."-".$this->getclave();
+        $salida = $this->getnombre() . "-" . $this->getemail()."-".$this->getperfil()."-".$this->getedad()."-".trim($this->getclave());
         return $salida;
     }   
 
     public static function Guardar($obj)
 	{
-       // $resultado = FALSE;
-        
-        if(!file_exists("/archivos")){
-            mkdir("/archivos");
+         if(!file_exists("archivos")){
+            mkdir("archivos");
         }
 
-    $ar = fopen("/archivos/alumno.txt", "a");
+    $ar = fopen("archivos/usuarios.txt", "a");
 		
 		
 		//ESCRIBO EN EL ARCHIVO
-		$cant = fwrite($ar, $obj->Mostrar()."\r\n");		
+		fwrite($ar, $obj->Mostrar()."\r\n");		
 	
 		//CIERRO EL ARCHIVO
-		fclose($ar);		
+        fclose($ar);		
+        
+        echo "Usuario dado de alta";
 		
     }
 
-    public static function TraerTodosLosAlumnos()
+    public static function TraerTodosLosUsuarios()
 	{
+            
+		$ListaDeUsuariosLeidos = array();
 
-		$ListaDeAlumnosLeidos = array();
-
-		//leo todos los productos del archivo
-		$archivo=fopen("../archivos/alumno.txt","r");
+		//leo todos los usuarios del archivo
+		$archivo=fopen("archivos/usuarios.txt","r");
 		
 		while(!feof($archivo))
 		{
 			$archAux = fgets($archivo);
-			$alumnos = explode("-", $archAux);
-			
-			//	var_dump($alumnos);
-			//no se...
-			//array_pop($alumnos);
-			
+			$usuarios = explode("-",$archAux);
+		                   
+          $nombre ="";// usuarios[0]
+          $email ="";// usuarios[1]
+          $perfil = "";// usuarios [2]
+          $edad = "";// usuarios [3]
+          $clave = "";// usuarios [4]
+          $imagen =""; // usuarios [5]          
+          
 
-            $nombre;
-            $legajo;
-            $foto;
-			$move = 0;
-            foreach ($alumnos as $key => $value) {
-				if($move == 0){
-					$nombre = $value;
-					$move++;
-				}else if($move== 1){
+          // hace que el último objeto vacío no entre en la lista
+          if($usuarios[0]!= ""){
 
-					$legajo = $value;
-					$move++;
-				}else if($move == 2){
-
-					$foto = $value;
-					$move=0;
-				}
+            $nombre = $usuarios[0];
+            $email = $usuarios[1];
+            $perfil = $usuarios[2];
+            $edad = $usuarios[3];
+            $clave = $usuarios[4];
+            
+            if(isset($usuarios[5])){
+                $imagen = $usuarios[5];
+              }
+                           
+              
+              if($imagen != ""){
+                  $elusuario = new UsuarioMod($nombre,$email,$perfil,$edad,$clave,$imagen);
+                }else{
+                    
+                    $elusuario = new Usuario($nombre,$email,$perfil,$edad,$clave);
+                }
+                
+                
+                $ListaDeUsuariosLeidos[] = $elusuario;
             }
 			
-			$elalumno = new Alumno($nombre,$legajo);
-			$elalumno->establecerFoto($foto);
-
-			// hace que el último objeto vacío no entre en la lista
-			$alumnos[0] = trim($alumnos[0]);
-
-			if($alumnos[0] != ""){
-						
-				$ListaDeAlumnosLeidos[] = $elalumno;
-			}
 		}
 		fclose($archivo);
-				
-		return $ListaDeAlumnosLeidos;
+      /*      echo "<pre>";
+        var_dump($ListaDeUsuariosLeidos);
+        echo "</pre>";*/
+		return $ListaDeUsuariosLeidos;
 		
     }
 

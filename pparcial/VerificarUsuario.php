@@ -1,49 +1,44 @@
 <?php
 
+include "UsuarioCarga.php";
+
 class Validar{
 
-public static function Valida(){
+public static function Valida($mail,$pass){
 
-if(count($_POST)!= 0){
+
+    $lista = array();
+    $lista = Usuario::TraerTodosLosUsuarios();
+
+    $flaj = 0;
     
-        $mail| = $_POST['email'];
-        $clave = $_POST['clave'];
+    foreach ($lista as $key => $value) {
         
-    
-    /*
-        if($contra === $seña){
-            header("Location: http://localhost/prog/ej_33/welcome.php");
-            die();        
-        }
+     if ($value->getemail() === $mail){
+         $flaj = 1;
+         
+        $sinblanks =  preg_replace('/\s+/','',$value->getclave());
         
+       if($sinblanks === $pass)
+         {
+             
+        $flaj = 2;
+        $suces = $value;
+        break;
+         } 
+     } 
     }
-    
-    
-    
-     echo '<form action="index.php" method="POST">';
-    
-    
-    echo '<fieldset>';
-    
-    
-    echo '<legend>Contraseña requerida</legend>';
-    echo '<label for="txtpass1">Contraseña ';
-        echo '<input type="password" name="pass1" id="txtpass1">';    
-        echo '</label>';
-    
-        echo '<label for="txtpass2">Repetir contraseña ';
-        echo '<input type="password" name="pass2" id="txtpass2">';    
-        echo '</label><br>';
-        
-    echo '<input type="submit">';
-    
-    
-    
-    echo '</fieldset>';
-    
-    echo '</form>';*/
+
+    if ($flaj == 1){
+        echo "contraseña incorrecta";
+    }else if($flaj == 2){
+        echo "Bienvenido, ".$suces->getnombre();
+    }else if($flaj == 0){
+        echo "email inválido";
+    }   
 
 }
+
 }
 
 ?>
