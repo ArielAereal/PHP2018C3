@@ -8,7 +8,7 @@
 class UsuarioValidado extends UsuarioMod
 {
 
-    public static function ModificarUsuario ($unemail,$unaimagen,$unnombre="",$unperfil = "",$unaedad="",$unaclave="",$emailtar = ""){
+    public static function ModificarUsuario ($unemail,$unaimagen = "",$unnombre="",$unperfil = "",$unaedad="",$unaclave="",$emailtar = ""){
 
         // verificar el perfil del email
         $profilo="";        

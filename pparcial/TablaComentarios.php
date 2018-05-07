@@ -28,6 +28,9 @@ $users = Usuario::TraerTodosLosUsuarios();
 
 $comentz = ComentarioImagen::TraerTodosLosComentarios();
 
+// viene bien
+//var_dump($comentz);
+
     if($usuario!=""){
         
         if($titulo!= ""){
@@ -296,9 +299,13 @@ $comentz = ComentarioImagen::TraerTodosLosComentarios();
       $flag = 0;
 
 
+
+
 foreach ($comentz as $key => $value) {
 
+    
 echo "<tr >";
+
 
     if($value instanceof ComentarioImagen){
 
@@ -324,7 +331,7 @@ echo "<tr >";
 
     }
     
-    
+
 } // sin filtros
 
 echo "</tbody>";

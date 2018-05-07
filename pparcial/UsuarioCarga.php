@@ -1,7 +1,5 @@
 <?php
 
-
-
 class Usuario{
 
     private $nombre;
@@ -129,9 +127,7 @@ class Usuario{
 			
 		}
 		fclose($archivo);
-      /*      echo "<pre>";
-        var_dump($ListaDeUsuariosLeidos);
-        echo "</pre>";*/
+     
 		return $ListaDeUsuariosLeidos;
 		
     }

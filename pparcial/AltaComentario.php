@@ -143,6 +143,11 @@ public static function TraerTodosLosComentarios(){
 
         // problema con el primer objeto del array
 
+        if (trim($comentarios[0]) != "")
+        {
+
+        
+
         for ($j=0; $j <count($titulosencontrados) ; $j++) { 
 
             $tit = str_replace(' ', '',$comentarios[0]); // Replaces all spaces.
@@ -171,8 +176,7 @@ public static function TraerTodosLosComentarios(){
                 // reflejados en el lenght del primer string
 
                 // con la opción similar text reduzco la posibilidad de error
-                // cuando el título es mayor a 12 caracteres
-
+           
                 similar_text($tituloparch,$comentarios[0],$per);
 
                if($per> 70){
@@ -214,6 +218,8 @@ public static function TraerTodosLosComentarios(){
                 
                 
             }
+
+        }
     }
 
 fclose($archivo);  
@@ -235,7 +241,11 @@ $link = fopen("archivos/houner.txt","r");
 while(!feof($link))
     {
         $archAux = fgets($link);
-        $ust = explode("-",$archAux);    
+        $ust = explode("-",$archAux);  
+        
+        if(trim($ust[0])!= ""){
+
+        
        
         foreach ($ust as $key => $value) {                            
             
@@ -248,7 +258,7 @@ while(!feof($link))
             }
 
 
-
+        }
             
         }
 

@@ -35,7 +35,7 @@ class TablaImagenes extends Tabla
                 if($value instanceof ComentarioImagen)
                 {                
                     echo "<tr>";
-                    echo "<td><img src= 'archivos/ImagenesDeComentarios/".$value->getimagen() . "' alt='noimg.mig'></td>";
+                    echo "<td><img heigth='200px' width='200px' src= 'archivos/ImagenesDeComentarios/".$value->getimagen() . "' alt='noimg.mig'></td>";
 
                     echo "</tr>";
 
@@ -52,11 +52,13 @@ class TablaImagenes extends Tabla
                 while(!feof($datos))
                 {
                     $value = fgets($datos);
-                
+                    if(trim($value)!= ""){
+                        
                 echo "<tr>";
-                echo "<td><img src= 'archivos/backUpFotos/".$value . "' alt='noimg.mig'></td>";
+                echo "<td><img heigth='200px' width='200px' src= 'archivos/backUpFotos/".trim($value) . "' alt='noimg.mig'></td>";
                 echo "</tr>";
 
+                    }
                 }
             }
         }
