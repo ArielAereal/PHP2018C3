@@ -13,8 +13,14 @@ public static function Consultar($eltipo = "",$elsabor = ""){
     $salidas = "";
     $salidat = "";
 
-    $hela = Helado::TraerTodosLosHelados();
+    // cambia en algo en que tenga o no imagen????
+    //... no
 
+
+    //$hela = Helado::TraerTodosLosHelados();
+
+    $hela = HeladoModificado::TraerTodosLosHelados();
+    
     if($elsabor != "")
     {
 

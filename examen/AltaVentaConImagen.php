@@ -83,7 +83,8 @@ public static function LaVenta($email,$sabor,$tipo,$cantidad,$imagen){
     $rta = ConsultaHelado::Consultar($tipo,$sabor);
     if( $rta == "Coincide $sabor y $tipo")
     {
-        $hela = Helado::TraerTodosLosHelados();
+        // helado con imagen
+        $hela = HeladoModificado::TraerTodosLosHelados();
 
     foreach ($hela as $key => $value) {
         if(trim($value->getsabor()) == $sabor){            

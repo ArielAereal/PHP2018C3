@@ -25,7 +25,7 @@ class HeladoModificado extends Helado{
 
         // todos los helados
         
-        $lados = Helado::TraerTodosLosHelados();
+        $lados = HeladoModificado::TraerTodosLosHelados();
         
         // el helado a modificar
         $hecho;
@@ -241,9 +241,9 @@ class HeladoModificado extends Helado{
 
                     if($hecho instanceof Heladomodificado){
 
-                        $target = new HeladoModificado($unsabor,$untipo,$getprecio(),$unacantidad,$hecho->getimagen());   
+                        $target = new HeladoModificado($unsabor,$untipo,$hecho->getprecio(),$unacantidad,$hecho->getimagen());   
                     }else{
-                        $target = new Helado($unsabor,$untipo,$getprecio(),$unacantidad);
+                        $target = new Helado($unsabor,$untipo,$hecho->getprecio(),$unacantidad);
                     }
     
                     array_splice($lados,$point,1,array($target));
@@ -268,7 +268,7 @@ class HeladoModificado extends Helado{
 
     // todos cargados en el array nuevo
 
-   /* echo "<pre>";
+    /*echo "<pre>";
     var_dump($losnuevos);
     echo "</pre>";*/
 
@@ -293,7 +293,49 @@ public function Mostrar(){
     $salida = parent::Mostrar();
     $salida = $salida . "-" . trim($this->getimagen());
     return $salida;
-}  
+}
+
+// ahora hay helados con imagen, retoco
+public static function TraerTodosLosHelados(){
+
+    $ListaDeHeladosLeidos = array();
+    //leo todos los helados del archivo
+    $archivo=fopen("Helados.txt","r");
+    
+    while(!feof($archivo))
+    {
+        $archAux = fgets($archivo);
+        $helados = explode("-",$archAux);
+                       
+      $sabor ="";// helados[0]
+      $tipo ="";// helados[1]
+      $precio = "";// helados [2]
+      $cantidad = "";// helados [3]      
+      $imagen = ""; // helados[4]
+
+      // hace que el último objeto vacío no entre en la lista
+      if(trim($helados[0])!= ""){
+        $sabor = $helados[0];
+        $tipo = $helados[1];
+        $precio = $helados[2];
+        $cantidad = $helados[3];
+        if(isset($helados[4])){
+            $imagen = $helados[4];
+            $elhelado = new HeladoModificado($sabor,$tipo,$precio,$cantidad,$imagen);
+            $ListaDeHeladosLeidos[] = $elhelado;
+        }else{
+            $elhelado = new Helado($sabor,$tipo,$precio,$cantidad);
+            $ListaDeHeladosLeidos[] = $elhelado;
+        }
+          
+                    
+        }
+        
+    }
+    fclose($archivo);
+ 
+    return $ListaDeHeladosLeidos;
+}
 
 }
 

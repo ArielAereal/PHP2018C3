@@ -1,7 +1,11 @@
 <?php
 
 
+// implementar una interfaz de imagen
+
 // Hardcode, 3 de cada uno
+
+// tema de resolver los ifs y yo uso bandera     
 
 include "HeladoCarga.php";
 include "ConsultarHelado.php";
@@ -12,6 +16,31 @@ include "AltaVentaConImagen.php";
 include "TablaVentas.php";
 
 include "HeladoModificacion.php";
+
+include "BorrarHelado.php";
+
+include "ListadoDeImagenes.php";
+
+
+// bandera venta
+// ?????
+// como que no lo usé al final
+$bvf = 0;
+
+// listado de imagenes por POST
+/*if(isset($_POST['listado'])){
+
+    TablaImagenes::TablaImg($_GET['listado']);
+}*/
+
+
+// lo pruebo por get, para verlas
+if(isset($_GET['listado'])){   
+
+        TablaImagenes::TablaImg($_GET['listado']);
+
+    }
+
 
 // tabla
 // imagen email sabor y cantidad tipo
@@ -63,6 +92,7 @@ if(isset($_FILES['imagen'])){
 
         // alta venta imagen
         VentaImagen::LaVenta($_POST['email'],$_POST['Sabor'],$_POST['Tipo'],$_POST['cantidad'],$_FILES['imagen']);
+        $bvf++;
     }
 
     }else if(isset($_POST['email'])){
@@ -71,12 +101,14 @@ if(isset($_FILES['imagen'])){
 
             // alta venta
             Venta::Laventa($_POST['email'],$_POST['Sabor'],$_POST['Tipo'],$_POST['cantidad']);
+            $bvf++;
         }
 
     }      
 
     //consultar helado
     // y modificar todo lo posible
+    // y borrar
 
     if(isset($_POST['Sabor'])|| isset($_POST['Tipo'])){
 
@@ -86,9 +118,26 @@ if(isset($_FILES['imagen'])){
     $back ="";
       
     if($vienesabor != NULL && $vienetipo != NULL)
-    {     
-        // modifica precio cantidad imagen
-        if(isset($_POST['precio'])|| isset($_POST['cantidad'])||isset($_FILES['imagen'])){
+    {    
+        
+        if(isset($_POST['borrar'])){
+
+            if(ConsultaHelado::Consultar($vienetipo,$vienesabor) == "Coincide $vienesabor y $vienetipo"){             
+            
+                HeladoBorrado::Borrar($vienesabor,$vienetipo);
+                //echo "borrar";
+            }else{
+
+                echo "Helado fuera de servicio o ya borrado";
+            }
+            
+            
+            // si viene con email no es modificacion
+            // guarda con las ventas: 
+        }else if(isset($_POST['email'])){
+            
+            // modifica precio cantidad imagen
+        }else if (isset($_POST['precio'])|| isset($_POST['cantidad'])||isset($_FILES['imagen'])){
         
             $era = 0;
             if(ConsultaHelado::Consultar($vienetipo,$vienesabor) == "Coincide $vienesabor y $vienetipo"){             
@@ -139,42 +188,39 @@ if(isset($_FILES['imagen'])){
 
                     if(isset($_POST['cantidad'])){
 
-                        HeladoModificado::ModificarHelado($vienesabor,$vienetipo,"","",$_POST['cantidad']);
-                        
+                        HeladoModificado::ModificarHelado($vienesabor,$vienetipo,"","",$_POST['cantidad']);                        
                     }
 
-
                 }
-
-                // tema de resolver los ifs y yo uso bandera
-              
-
-                // abajo error de helado no encontrado
-            }else{
+                
+                // fin modificacion total
+            }else {
                 echo ConsultaHelado::Consultar($vienetipo,$vienesabor);
-                echo "Imposible realizar la modificación";
+                echo "imposible realizar la modificación";
             }
-
-        
-            // fin modificacion total
-        }else {
-
+            
+            
+        }else{              
             //todos entran
-            $back = ConsultaHelado::Consultar($vienetipo,$vienesabor);
+           $back = ConsultaHelado::Consultar($vienetipo,$vienesabor);
         }
 
-     }else if($vienesabor != NULL){
+     
+} else{
+
+    if($vienesabor != NULL){
            
-        //sabor solo
-      $back =  ConsultaHelado::Consultar("",$vienesabor);
-        
-    } else if($vienetipo != NULL){
+    //sabor solo
+  $back =  ConsultaHelado::Consultar("",$vienesabor);
     
-        // tipo solo
-      $back =  ConsultaHelado::Consultar($vienetipo);
+} else if($vienetipo != NULL){
 
-    }
+    // tipo solo
+  $back =  ConsultaHelado::Consultar($vienetipo);
 
+}
+
+}
     if($back != ""){
 
         echo $back;

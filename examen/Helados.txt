@@ -1,7 +1,4 @@
-vainilla-crema-550-300-vainilla_crema.jpg
-chocolate-crema-120-2
-durazno-agua-1200-144
-frutilla-agua-1200-141
-pepinillos-crema-250-467
-frutos rojos-crema-350-427
-mostaza-agua-350-482
+chocolate-crema-120-300-chocolate_crema.jpg
+durazno-agua-550-300-durazno_agua.jpg
+crema del cielo-crema-350-446-crema del cielo_crema.JPG
+limon-crema-150-5000-limon_crema.jpg

@@ -71,6 +71,8 @@ public static function GuardarHelado($unhelado){
 
 }// fin 1
 
+
+// ahora hay helados con imagen, retoco la herencia de helado modificado
 public static function TraerTodosLosHelados(){
 
     $ListaDeHeladosLeidos = array();
@@ -85,18 +87,18 @@ public static function TraerTodosLosHelados(){
       $sabor ="";// helados[0]
       $tipo ="";// helados[1]
       $precio = "";// helados [2]
-      $cantidad = "";// helados [3]      
-      
+      $cantidad = "";// helados [3]            
+
       // hace que el último objeto vacío no entre en la lista
       if(trim($helados[0])!= ""){
         $sabor = $helados[0];
         $tipo = $helados[1];
         $precio = $helados[2];
         $cantidad = $helados[3];
-          
-          $elhelado = new Helado($sabor,$tipo,$precio,$cantidad);
-                    
-          $ListaDeHeladosLeidos[] = $elhelado;
+        
+        $elhelado = new Helado($sabor,$tipo,$precio,$cantidad);
+            $ListaDeHeladosLeidos[] = $elhelado;
+                   
         }
         
     }
