@@ -2,7 +2,6 @@
 
 class Helado{
 
-
 // sabor y tipo son id
 
 private $sabor;
@@ -10,12 +9,11 @@ private $precio;
 private $tipo;
 private $cantidad;
 
-
 public function __construct($unsabor,$untipo,$unprecio,$unacantidad){
 
     $this->sabor = $unsabor;
     $this->tipo = $untipo;
-    $this->precio = $unprecio;
+    $this->precio = (float)$unprecio;
     $this->cantidad = (int)$unacantidad;
 
 
@@ -62,8 +60,7 @@ public function Mostrar(){
 public static function GuardarHelado($unhelado){
 
     $ar = fopen("Helados.txt", "a");
-    
-    
+        
     //ESCRIBO EN EL ARCHIVO
     fwrite($ar, $unhelado->Mostrar()."\r\n");		
 
@@ -77,7 +74,7 @@ public static function GuardarHelado($unhelado){
 public static function TraerTodosLosHelados(){
 
     $ListaDeHeladosLeidos = array();
-    //leo todos los usuarios del archivo
+    //leo todos los helados del archivo
     $archivo=fopen("Helados.txt","r");
     
     while(!feof($archivo))
@@ -85,10 +82,10 @@ public static function TraerTodosLosHelados(){
         $archAux = fgets($archivo);
         $helados = explode("-",$archAux);
                        
-      $sabor ="";// usuarios[0]
-      $tipo ="";// usuarios[1]
-      $precio = "";// usuarios [2]
-      $cantidad = "";// usuarios [3]      
+      $sabor ="";// helados[0]
+      $tipo ="";// helados[1]
+      $precio = "";// helados [2]
+      $cantidad = "";// helados [3]      
       
       // hace que el último objeto vacío no entre en la lista
       if(trim($helados[0])!= ""){
@@ -97,19 +94,15 @@ public static function TraerTodosLosHelados(){
         $precio = $helados[2];
         $cantidad = $helados[3];
           
-                
           $elhelado = new Helado($sabor,$tipo,$precio,$cantidad);
-          
-            
-            
-            $ListaDeHeladosLeidos[] = $elhelado;
+                    
+          $ListaDeHeladosLeidos[] = $elhelado;
         }
         
     }
     fclose($archivo);
  
     return $ListaDeHeladosLeidos;
-
 }
 
 

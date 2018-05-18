@@ -1,57 +1,57 @@
 <?php
 
 class ConsultaHelado{
-
-
-    //3 er intento
+   
 public static function Consultar($eltipo = "",$elsabor = ""){
 
-    //$duda = false;
+    // cuenta encuentros
+    $flag = 0;
 
- $flag = 0;
- //   $prende;
+    //encuentra los dos en objetos distintos
+    $otro = 0;
 
- $otro = 0;
- $salidas = "";
- $salidat = "";
+    $salidas = "";
+    $salidat = "";
 
- if($flag == 0)
- {
+    $hela = Helado::TraerTodosLosHelados();
 
- 
-
-$hela = Helado::TraerTodosLosHelados();
-
-if($elsabor != "")
-{
-
-foreach ($hela as $key => $value) {
-    if(trim($value->getsabor()) == trim($elsabor))
+    if($elsabor != "")
     {
-        $flag++;
-        $salidas = trim($value->getsabor());
-        if(trim($value->gettipo()) == trim($eltipo)){
-            $salidat = trim($value->gettipo());
-            $flag++;       
+
+        foreach ($hela as $key => $value) {
+
+            if(trim($value->getsabor()) == trim($elsabor))
+            {
+
+                //1) encontré el sabor, flag == 1
+            $flag=1;
+            $salidas = trim($value->getsabor());
+
+                if(trim($value->gettipo()) == trim($eltipo)){
+                    // 2) encontré también el tipo, flag == 2
+                    $salidat = trim($value->gettipo());
+                    $flag++;       
+                }
+                break;
+            }
         }
-        break;
-    }
-}
-if($flag != 2){
 
+        // si no encontré los dos, hace falta????
+        if($flag != 2){
 
-foreach ($hela as $key => $value) {
-   // var_dump($value);
-    if(trim($value->gettipo()) == trim($eltipo)){
-        $salidat = trim($value->gettipo());
-        $flag++;
-        $otro++;              
-        break;
-    }
+            foreach ($hela as $key => $value) {
    
-}
-}
+                if(trim($value->gettipo()) == trim($eltipo)){
+                    $salidat = trim($value->gettipo());
+                    $flag++;
+                    $otro++;              
+                    break;
+                }
+   
+            }
+        }
 
+        // si el sabor no viene
 }else{
 
     foreach ($hela as $key => $value) {
@@ -59,22 +59,23 @@ foreach ($hela as $key => $value) {
             $salidat = trim($value->gettipo());
             $flag++;
             $otro++;
+            break;
         }
-        break;
 
     }
 
 }
 
-}
 
 if($flag == 2){
 
     $muestre = "Coincide $salidas y $salidat";
 
+    // deberia decir que chocolate con agua no existe y punto?    
+    
     if($otro == 1)
     {
-        echo "pasa que $salidas y $salidat son de distintos helados";
+        $muestre =$muestre . ". Pasa que $salidas tiene otro tipo, y $salidat tiene otro sabor.";
     }
 
     
@@ -85,35 +86,52 @@ if($flag == 1)
 
     if($salidas != "")
     {
-        $muestre = "Coincide $salidas, no coincide el tipo ";
+        $muestre = "Coincide $salidas";
+
+        if($eltipo != ""){
+
+            $muestre = $muestre . ", no coincide el tipo ";
+        }
     }
 
     if($salidat != "")
     {
-        $muestre = "Coincide $salidat, no coincide el sabor";
+        $muestre = "Coincide $salidat";
+        
+        if($elsabor != ""){
+
+            $muestre = $muestre . ", no coincide el sabor";
+        }
     }
 
 }
 
 if ($flag == 0){
 
-    $muestre = "No coincide ni tipo ni sabor";
-}
+    if($eltipo != "" || $elsabor != ""){
+    
+        if($eltipo != "" && $elsabor != ""){
 
+            $muestre = "No coincide ni el tipo ni el sabor";
+        }else{
+
+            if($eltipo != ""){
+                $muestre = "No coincide el tipo";
+            }
+
+            if($elsabor != ""){
+                $muestre = "No coincide el sabor";
+            }
+        
+        }
+
+    }
+}
 
 return $muestre;
 
-
-
-
-
-
 }
 
 }
-
-
-
-
 
 ?>
